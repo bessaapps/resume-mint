@@ -43,3 +43,5 @@ next-env.d.ts
 .idea
 
 /generated/prisma
+
+./data.db
