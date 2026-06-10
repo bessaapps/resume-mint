@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Prospect {
+  id       Int    @id @default(autoincrement())
+  company  String
+  position String
+}
