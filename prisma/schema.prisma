@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Prospect {
-  id                 Int     @id @default(autoincrement())
+  id                 Int      @id @default(autoincrement())
   company            String
   position           String
   website            String?
@@ -16,4 +16,6 @@ model Prospect {
   companyDescription String?
   jobDescription     String?
   notes              String?
+  createdAt          DateTime
+  updatedAt          DateTime @default(now())
 }

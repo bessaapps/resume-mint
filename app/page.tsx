@@ -3,6 +3,7 @@
 import { Prospect } from "@/generated/prisma/client";
 import { createProspect, getProspects } from "@/app/actions";
 import { SubmitEvent, useEffect, useRef, useState } from "react";
+import dayjs from "dayjs";
 
 export default function HomePage() {
   const [prospects, setProspects] = useState<Prospect[]>([]);
@@ -16,7 +17,9 @@ export default function HomePage() {
 
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!company || !position) return;
+
     createProspect({
       company,
       position,
@@ -24,6 +27,7 @@ export default function HomePage() {
       status,
       companyDescription,
       jobDescription,
+      createdAt: new Date(),
     }).then((prospect) => {
       setProspects([prospect, ...prospects]);
     });
@@ -114,12 +118,12 @@ export default function HomePage() {
             </tr>
           </thead>
           <tbody>
-            {prospects?.map(({ id, company, position }) => (
+            {prospects?.map(({ id, company, position, updatedAt }) => (
               <tr key={id}>
                 <th>{company}</th>
                 <td>{position}</td>
                 <td>Researching</td>
-                <td>2/6/26</td>
+                <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
               </tr>
             ))}
           </tbody>
