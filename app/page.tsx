@@ -18,14 +18,14 @@ export default function HomePage() {
         </p>
         <div className={"flex gap-4"}>
           <Link href={"/register"}>
-            <button className={"btn"}>Get Started for FREE!</button>
+            <button className={"btn btn-primary"}>Get Started for FREE!</button>
           </Link>
           <Link href={"/login"}>
             <button className={"btn btn-outline"}>Login</button>
           </Link>
         </div>
         <Link href={"/dashboard/prospects"}>
-          <button className={"btn"}>Dashboard</button>
+          <button className={"btn btn-primary"}>Dashboard</button>
         </Link>
         <p className={"text-neutral-700 text-sm"}>
           Proudly created by{" "}
