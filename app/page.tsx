@@ -112,9 +112,10 @@ export default function HomePage() {
             <tr>
               <th>Company</th>
               <th>Position</th>
+              <th>Website</th>
               <th>Status</th>
               <th>Last Activity</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -122,8 +123,12 @@ export default function HomePage() {
               <tr key={id}>
                 <th>{company}</th>
                 <td>{position}</td>
-                <td>Researching</td>
+                <td>{website}</td>
+                <td>{status}</td>
                 <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
+                <td>
+                  <button className={"btn"}>Generate Cover Letter</button>
+                </td>
               </tr>
             ))}
           </tbody>
