@@ -6,13 +6,25 @@ import { SubmitEvent, useEffect, useRef, useState } from "react";
 
 export default function HomePage() {
   const [prospects, setProspects] = useState<Prospect[]>([]);
-  const [company, setCompany] = useState<string>("");
-  const [position, setPosition] = useState<string>("");
+  const [company, setCompany] = useState<string>();
+  const [position, setPosition] = useState<string>();
+  const [website, setWebsite] = useState<string>();
+  const [status, setStatus] = useState<string>();
+  const [companyDescription, setCompanyDescription] = useState<string>();
+  const [jobDescription, setJobDescription] = useState<string>();
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    createProspect({ company, position }).then((prospect) => {
+    if (!company || !position) return;
+    createProspect({
+      company,
+      position,
+      website,
+      status,
+      companyDescription,
+      jobDescription,
+    }).then((prospect) => {
       setProspects([prospect, ...prospects]);
     });
   };
@@ -46,12 +58,38 @@ export default function HomePage() {
                   value={company}
                   onChange={(event) => setCompany(event.currentTarget.value)}
                   className={"input w-full"}
+                  required
                 />
                 <legend className={"fieldset-legend"}>Position</legend>
                 <input
                   value={position}
                   onChange={(event) => setPosition(event.currentTarget.value)}
                   className={"input w-full"}
+                  required
+                />
+                <legend className={"fieldset-legend"}>Website</legend>
+                <input
+                  value={website}
+                  onChange={(event) => setWebsite(event.currentTarget.value)}
+                  className={"input w-full"}
+                />
+                <legend className={"fieldset-legend"}>
+                  Company Description
+                </legend>
+                <textarea
+                  value={companyDescription}
+                  onChange={(event) =>
+                    setCompanyDescription(event.currentTarget.value)
+                  }
+                  className={"textarea h-24 w-full"}
+                />
+                <legend className={"fieldset-legend"}>Job Description</legend>
+                <textarea
+                  value={jobDescription}
+                  onChange={(event) =>
+                    setJobDescription(event.currentTarget.value)
+                  }
+                  className={"textarea h-24 w-full"}
                 />
               </fieldset>
               <button type={"submit"} className={"btn btn-primary"}>

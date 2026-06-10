@@ -8,7 +8,12 @@ datasource db {
 }
 
 model Prospect {
-  id       Int    @id @default(autoincrement())
-  company  String
-  position String
+  id                 Int     @id @default(autoincrement())
+  company            String
+  position           String
+  website            String?
+  status             String?
+  companyDescription String?
+  jobDescription     String?
+  notes              String?
 }
