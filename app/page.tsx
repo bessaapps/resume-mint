@@ -131,20 +131,24 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody>
-                {prospects?.map(({ id, company, position, updatedAt }) => (
-                  <tr key={id}>
-                    <th>{company}</th>
-                    <td>{position}</td>
-                    <td>{website}</td>
-                    <td>{status}</td>
-                    <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
-                    <td>
-                      <Link href={`/${id}/cover-letter`}>
-                        <button className={"btn"}>Generate Cover Letter</button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+                {prospects?.map(
+                  ({ id, company, position, website, status, updatedAt }) => (
+                    <tr key={id}>
+                      <th>{company}</th>
+                      <td>{position}</td>
+                      <td>{website}</td>
+                      <td>{status}</td>
+                      <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
+                      <td>
+                        <Link href={`/${id}/cover-letter`}>
+                          <button className={"btn"}>
+                            Generate Cover Letter
+                          </button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ),
+                )}
               </tbody>
             </table>
           </div>
