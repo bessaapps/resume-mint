@@ -6,7 +6,8 @@ import { ProspectCreateInput } from "@/generated/prisma/models/Prospect";
 export const createProspect = async (data: ProspectCreateInput) =>
   prisma.prospect.create({ data });
 
-export const getProspects = async () => prisma.prospect.findMany();
+export const getProspects = async () =>
+  prisma.prospect.findMany({ orderBy: { updatedAt: "desc" } });
 
 export const getProspect = async (prospectId: number) =>
   prisma.prospect.findUnique({ where: { id: prospectId } });

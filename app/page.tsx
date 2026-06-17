@@ -88,22 +88,22 @@ export default function HomePage() {
                       className={"input w-full"}
                     />
                     <legend className={"fieldset-legend"}>
-                      Company Description
-                    </legend>
-                    <textarea
-                      value={companyDescription}
-                      onChange={(event) =>
-                        setCompanyDescription(event.currentTarget.value)
-                      }
-                      className={"textarea h-24 w-full"}
-                    />
-                    <legend className={"fieldset-legend"}>
                       Job Description
                     </legend>
                     <textarea
                       value={jobDescription}
                       onChange={(event) =>
                         setJobDescription(event.currentTarget.value)
+                      }
+                      className={"textarea h-24 w-full"}
+                    />
+                    <legend className={"fieldset-legend"}>
+                      Company Description
+                    </legend>
+                    <textarea
+                      value={companyDescription}
+                      onChange={(event) =>
+                        setCompanyDescription(event.currentTarget.value)
                       }
                       className={"textarea h-24 w-full"}
                     />
