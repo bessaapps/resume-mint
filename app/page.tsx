@@ -5,6 +5,7 @@ import { createProspect, getProspects } from "@/app/actions";
 import { SubmitEvent, useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
+import { STATUSES } from "@/lib/constants";
 
 export default function HomePage() {
   const [prospects, setProspects] = useState<Prospect[]>([]);
@@ -155,14 +156,14 @@ export default function HomePage() {
                             </p>
                           )}
                         </td>
-                        <td>
+                        <td className={"w-50"}>
                           <select
                             value={status || "Researching"}
-                            className={"select"}
+                            className={"select select-ghost"}
                           >
-                            <option>Researching</option>
-                            <option>Applied</option>
-                            <option>Rejected</option>
+                            {STATUSES.map((status) => (
+                              <option key={status}>{status}</option>
+                            ))}
                           </select>
                         </td>
                         <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
