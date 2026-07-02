@@ -169,7 +169,9 @@ export default function HomePage() {
                         <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
                         <td>
                           <Link href={`/${id}/cover-letter`}>
-                            <button className={"btn text-nowrap"}>
+                            <button
+                              className={"btn btn-secondary btn-sm text-nowrap"}
+                            >
                               Cover Letter
                             </button>
                           </Link>
