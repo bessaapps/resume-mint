@@ -166,7 +166,7 @@ export default function HomePage() {
                             ))}
                           </select>
                         </td>
-                        <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
+                        <td>{dayjs(updatedAt).format("M/D/YY")}</td>
                         <td>
                           <Link href={`/${id}/cover-letter`}>
                             <button
