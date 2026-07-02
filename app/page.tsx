@@ -132,22 +132,50 @@ export default function HomePage() {
               </thead>
               <tbody>
                 {prospects?.map(
-                  ({ id, company, position, website, status, updatedAt }) => (
-                    <tr key={id}>
-                      <th>{company}</th>
-                      <td>{position}</td>
-                      <td>{website}</td>
-                      <td>{status}</td>
-                      <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
-                      <td>
-                        <Link href={`/${id}/cover-letter`}>
-                          <button className={"btn"}>
-                            Generate Cover Letter
-                          </button>
-                        </Link>
-                      </td>
-                    </tr>
-                  ),
+                  ({ id, company, position, website, status, updatedAt }) => {
+                    let url;
+
+                    if (website)
+                      try {
+                        url = new URL(website);
+                      } catch (error) {
+                        console.log(error);
+                      }
+
+                    return (
+                      <tr key={id}>
+                        <th>{company}</th>
+                        <td>{position}</td>
+                        <td>
+                          {url && (
+                            <p className={"line-clamp-1"}>
+                              <Link href={url} target={"_blank"}>
+                                {url.hostname}
+                              </Link>
+                            </p>
+                          )}
+                        </td>
+                        <td>
+                          <select
+                            value={status || "Researching"}
+                            className={"select"}
+                          >
+                            <option>Researching</option>
+                            <option>Applied</option>
+                            <option>Rejected</option>
+                          </select>
+                        </td>
+                        <td>{dayjs(updatedAt).format("MM/DD/YYYY")}</td>
+                        <td>
+                          <Link href={`/${id}/cover-letter`}>
+                            <button className={"btn text-nowrap"}>
+                              Cover Letter
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  },
                 )}
               </tbody>
             </table>
