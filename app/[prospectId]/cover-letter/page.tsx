@@ -42,7 +42,7 @@ export default function CoverLetterPage({
       return setIsThinking(false);
 
     const prompt =
-      `Write me the body of a cover letter with no salutation or signature. It should be 3 paragraphs and should highlight my relevant skills. The company I'm applying to  is ${activeProspect.company}. ` +
+      `Write me the body of a cover letter with no salutation or signature. It should only be 1,000 characters long and should highlight my relevant skills. The company I'm applying to  is ${activeProspect.company}. ` +
       `${
         activeProspect?.companyDescription
           ? `Here is some information about the company: "${activeProspect.companyDescription}" `
