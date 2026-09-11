@@ -16,6 +16,7 @@ export default function HomePage() {
   const [companyDescription, setCompanyDescription] = useState<string>();
   const [jobDescription, setJobDescription] = useState<string>();
   const modalRef = useRef<HTMLDialogElement>(null);
+  const aiWorkerRef = useRef<Worker | null>(null);
 
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +41,25 @@ export default function HomePage() {
     getProspects().then((prospects) => setProspects(prospects));
   }, []);
 
+  useEffect(() => {
+    aiWorkerRef.current = new Worker(
+      new URL("./ai-worker.ts", import.meta.url),
+      {
+        type: "module",
+      },
+    );
+    aiWorkerRef.current.postMessage({ type: "init" });
+    aiWorkerRef.current.onmessage = (event) => {
+      console.log("aiworkerRef", event.data);
+    };
+
+    return () => {
+      if (aiWorkerRef?.current) {
+        aiWorkerRef.current.terminate();
+      }
+    };
+  }, []);
+
   return (
     <main className={"w-full max-w-7xl mx-auto p-4"}>
       <div className={"card bg-base-100 shadow-sm w-full"}>
@@ -50,6 +70,18 @@ export default function HomePage() {
               onClick={() => modalRef?.current && modalRef.current.showModal()}
             >
               Add Prospect
+            </button>
+            <button
+              className={"btn btn-primary btn-lg"}
+              onClick={() =>
+                aiWorkerRef?.current &&
+                aiWorkerRef.current.postMessage({
+                  type: "generate",
+                  text: "Write a high-energy tagline for a coffee shop.",
+                })
+              }
+            >
+              g
             </button>
             <dialog ref={modalRef} className={"modal"}>
               <div className={"modal-box"}>

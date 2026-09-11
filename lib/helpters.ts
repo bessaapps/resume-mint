@@ -1,9 +1,12 @@
-import { GoogleGenAI } from "@google/genai";
 import { Dispatch, SetStateAction } from "react";
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
+const aiWorker = new Worker(new URL("./ai-worker.ts", import.meta.url), {
+  type: "module",
 });
+aiWorker.postMessage({ type: "init" });
+aiWorker.onmessage = (event) => {
+  console.log("aiworkerRef", event.data);
+};
 
 export const generateContent = async (
   prompt: string,
@@ -15,14 +18,7 @@ export const generateContent = async (
     setIsThinking: Dispatch<SetStateAction<boolean>>;
   },
 ) => {
-  const response = await ai.models.generateContentStream({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
-
-  for await (const chunk of response) {
-    setCoverLetter((prev: string) => prev + chunk.text);
-  }
+  aiWorker.postMessage({ type: "generate", prompt });
 
   setIsThinking(false);
 };
