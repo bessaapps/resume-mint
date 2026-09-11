@@ -8,10 +8,10 @@ const ai = new GoogleGenAI({
 export const generateContent = async (
   prompt: string,
   {
-    setCoverLetter,
+    setContent,
     setIsThinking,
   }: {
-    setCoverLetter: Dispatch<SetStateAction<string>>;
+    setContent: Dispatch<SetStateAction<string>>;
     setIsThinking: Dispatch<SetStateAction<boolean>>;
   },
 ) => {
@@ -21,7 +21,7 @@ export const generateContent = async (
   });
 
   for await (const chunk of response) {
-    setCoverLetter((prev: string) => prev + chunk.text);
+    setContent((prev: string) => prev + chunk.text);
   }
 
   setIsThinking(false);

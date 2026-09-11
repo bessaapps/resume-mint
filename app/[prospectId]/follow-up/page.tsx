@@ -13,14 +13,14 @@ import { getProspect } from "@/app/actions";
 import ReactMarkdown from "react-markdown";
 import { generateContent } from "@/lib/helpters";
 
-export default function CoverLetterPage({
+export default function FollowUpPage({
   params,
 }: {
   params: Promise<{ prospectId: string }>;
 }) {
   const [activeProspect, setActiveProspect] = useState<Prospect | null>();
   const [isFetchingProspect, setIsFetchingProspect] = useState(true);
-  const [coverLetter, setCoverLetter] = useState("");
+  const [followUp, setFollowUp] = useState("");
   const [isThinking, setIsThinking] = useState(true);
   const { prospectId } = React.use(params);
 
@@ -42,7 +42,7 @@ export default function CoverLetterPage({
       return;
 
     const prompt =
-      `Write me the body of a cover letter with no salutation or signature. It should only be 1,000 characters long and should highlight my relevant skills. The company I'm applying to is ${activeProspect.company}. ` +
+      `Write me the body of a follow-up email with no salutation or signature. It should only be 1,000 characters long, should highlight my relevant skills, and have a clear call to action at the end. The company I'm applying to is ${activeProspect.company}. ` +
       `${
         activeProspect?.companyDescription
           ? `Here is some information about the company: "${activeProspect.companyDescription}" `
@@ -56,7 +56,7 @@ export default function CoverLetterPage({
       }` +
       `My professional background is as follows: "${background}" My skills include the following: "${skills}" My experience includes the following: "${experience}" My educational background is as follows: "${education}" My projects include the following: "${projects}" Do not append suggestions, follow-up questions, or offers to help.`;
 
-    generateContent(prompt, { setContent: setCoverLetter, setIsThinking });
+    generateContent(prompt, { setContent: setFollowUp, setIsThinking });
   }, [activeProspect]);
 
   return (
@@ -95,13 +95,13 @@ export default function CoverLetterPage({
                     "text-2xl font-semibold flex items-center gap-2 mb-2"
                   }
                 >
-                  Cover Letter{" "}
+                  Follow-Up{" "}
                   {isThinking && (
                     <span className={"loading loading-dots loading-xl"}></span>
                   )}
                 </h1>
               </div>
-              {coverLetter && <ReactMarkdown>{coverLetter}</ReactMarkdown>}
+              {followUp && <ReactMarkdown>{followUp}</ReactMarkdown>}
             </>
           )}
         </div>
