@@ -3,9 +3,7 @@
 import { Prospect } from "@/generated/prisma/client";
 import { createProspect, getProspects } from "@/app/actions";
 import { SubmitEvent, useEffect, useRef, useState } from "react";
-import dayjs from "dayjs";
-import Link from "next/link";
-import { STATUSES } from "@/lib/constants";
+import Row from "@/components/Row";
 
 export default function HomePage() {
   const [prospects, setProspects] = useState<Prospect[]>([]);
@@ -132,54 +130,9 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody>
-                {prospects?.map(
-                  ({ id, company, position, website, status, updatedAt }) => {
-                    let url;
-
-                    if (website)
-                      try {
-                        url = new URL(website);
-                      } catch (error) {
-                        console.log(error);
-                      }
-
-                    return (
-                      <tr key={id}>
-                        <th>{company}</th>
-                        <td>{position}</td>
-                        <td>
-                          {url && (
-                            <p className={"line-clamp-1"}>
-                              <Link href={url} target={"_blank"}>
-                                {url.hostname}
-                              </Link>
-                            </p>
-                          )}
-                        </td>
-                        <td className={"w-50"}>
-                          <select
-                            value={status || "Researching"}
-                            className={"select select-ghost"}
-                          >
-                            {STATUSES.map((status) => (
-                              <option key={status}>{status}</option>
-                            ))}
-                          </select>
-                        </td>
-                        <td>{dayjs(updatedAt).format("M/D/YY")}</td>
-                        <td>
-                          <Link href={`/${id}/cover-letter`}>
-                            <button
-                              className={"btn btn-secondary btn-sm text-nowrap"}
-                            >
-                              Cover Letter
-                            </button>
-                          </Link>
-                        </td>
-                      </tr>
-                    );
-                  },
-                )}
+                {prospects?.map((prospect) => (
+                  <Row key={prospect.id} prospect={prospect} />
+                ))}
               </tbody>
             </table>
           </div>
