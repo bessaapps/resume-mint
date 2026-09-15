@@ -10,7 +10,6 @@ import {
   skills,
 } from "@/lib/profile";
 import { getProspect } from "@/app/actions";
-import ReactMarkdown from "react-markdown";
 import { generateContent } from "@/lib/helpers";
 
 export default function CoverLetterPage({
@@ -31,7 +30,7 @@ export default function CoverLetterPage({
       setActiveProspect(prospect);
       setIsFetchingProspect(false);
     });
-  }, [activeProspect?.id, prospectId]);
+  }, [prospectId]);
 
   useEffect(() => {
     if (
@@ -101,7 +100,7 @@ export default function CoverLetterPage({
                   )}
                 </h1>
               </div>
-              {coverLetter && <ReactMarkdown>{coverLetter}</ReactMarkdown>}
+              {coverLetter}
             </>
           )}
         </div>
