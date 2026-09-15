@@ -11,7 +11,6 @@ import {
 } from "@/lib/profile";
 import { getProspect } from "@/app/actions";
 import ReactMarkdown from "react-markdown";
-import { generateContent } from "@/lib/helpters";
 
 export default function FollowUpPage({
   params,
@@ -56,7 +55,7 @@ export default function FollowUpPage({
       }` +
       `My professional background is as follows: "${background}" My skills include the following: "${skills}" My experience includes the following: "${experience}" My educational background is as follows: "${education}" My projects include the following: "${projects}" Do not append suggestions, follow-up questions, or offers to help.`;
 
-    generateContent(prompt, { setContent: setFollowUp, setIsThinking });
+    // generateContent(prompt, { setContent: setFollowUp, setIsThinking });
   }, [activeProspect]);
 
   return (

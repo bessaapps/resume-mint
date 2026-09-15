@@ -6,6 +6,7 @@
       "name": "resume-mint",
       "dependencies": {
         "@google/genai": "^2.22.0",
+        "@openrouter/agent": "^0.11.0",
         "@prisma/adapter-better-sqlite3": "^7.10.0",
         "@prisma/adapter-libsql": "^7.10.0",
         "@prisma/client": "^7.10.0",
@@ -278,6 +279,10 @@
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
     "@nolyfill/is-core-module": ["@nolyfill/is-core-module@1.0.39", "", {}, "sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA=="],
+
+    "@openrouter/agent": ["@openrouter/agent@0.11.0", "", { "dependencies": { "@openrouter/sdk": "^0.13.7", "zod": "^4.0.0" }, "peerDependencies": { "@modelcontextprotocol/client": "^2.0.0" }, "optionalPeers": ["@modelcontextprotocol/client"] }, "sha512-8idTYNZ4MjQyNJ2HKMTSmocVgQYajB43xG3rqa7ronK8Xfqx6XnIKvfhtqmAeJTPkhYppVuuQ+DKkMXlVEA+SA=="],
+
+    "@openrouter/sdk": ["@openrouter/sdk@0.13.67", "", { "dependencies": { "zod": "^3.25.0 || ^4.0.0" } }, "sha512-kUVaFYA9Xehq67ndTk98i+tRLfYH/F6xSf/WuC8dsukBzcgBvYQydoeKw4Xe+peXG/wOVtDxukWt5SqzhbloKw=="],
 
     "@prisma/adapter-better-sqlite3": ["@prisma/adapter-better-sqlite3@7.10.0", "", { "dependencies": { "@prisma/driver-adapter-utils": "7.10.0", "better-sqlite3": "^12.6.0" } }, "sha512-lqEUP9aTaJ0aDbIIrr/jmCqmkmmoAB5i7xeK6LLOTIxrOeK9KDLJDjtlqKKxAQulSwk5fNSshor8Az1QNZdI5Q=="],
 
