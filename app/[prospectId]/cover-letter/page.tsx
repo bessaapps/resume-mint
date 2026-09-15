@@ -9,8 +9,9 @@ import {
   projects,
   skills,
 } from "@/lib/profile";
-import { generateContent, getProspect } from "@/app/actions";
+import { getProspect } from "@/app/actions";
 import ReactMarkdown from "react-markdown";
+import { generateContent } from "@/lib/helpers";
 
 export default function CoverLetterPage({
   params,
@@ -55,12 +56,7 @@ export default function CoverLetterPage({
       }` +
       `My professional background is as follows: "${background}" My skills include the following: "${skills}" My experience includes the following: "${experience}" My educational background is as follows: "${education}" My projects include the following: "${projects}" Do not append suggestions, follow-up questions, or offers to help.`;
 
-    (async () => {
-      const content = await generateContent(prompt);
-
-      setCoverLetter(content);
-      setIsThinking(false);
-    })();
+    generateContent(prompt, { setContent: setCoverLetter, setIsThinking });
   }, [activeProspect]);
 
   return (
