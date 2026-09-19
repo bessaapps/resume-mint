@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { STATUSES } from "@/lib/constants";
 import dayjs from "dayjs";
 import { Prospect } from "@/generated/prisma/client";
+import { updateProspect } from "@/app/actions";
+import { useState } from "react";
 
 export default function Row({ prospect }: { prospect: Prospect }) {
-  const { id, company, position, website, status, updatedAt } = prospect;
+  const [status, setStatus] = useState(prospect.status);
+  const { id, company, position, website, updatedAt } = prospect;
 
   let url;
 
@@ -14,6 +19,12 @@ export default function Row({ prospect }: { prospect: Prospect }) {
     } catch (error) {
       console.log(error);
     }
+
+  const handleStatusChange = async (status: string) => {
+    updateProspect(id, { status })
+      .then(() => setStatus(status))
+      .catch((error) => console.error(error));
+  };
 
   return (
     <tr key={id}>
@@ -32,6 +43,7 @@ export default function Row({ prospect }: { prospect: Prospect }) {
         <select
           value={status || "Researching"}
           className={"select select-ghost"}
+          onChange={(event) => handleStatusChange(event.currentTarget.value)}
         >
           {STATUSES.map((status) => (
             <option key={status}>{status}</option>
